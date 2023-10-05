@@ -5,30 +5,29 @@
  * @head: A pointer the head of the linked list.
  * @number: The number to insert.
  *
- * Return: NULL if fail otherwise points to new node
+ * Return: NULL if failure, otherwise point to new node
  */
- 
 listint_t *insert_node(listint_t **head, int number)
 {
-	listint_t *node = *head, *new_node;
+	listint_t *node = *head, *new;
 
-	new_node = malloc(sizeof(listint_t));
+	new = malloc(sizeof(listint_t));
 	if (new == NULL)
 		return (NULL);
-	new_node->n = number;
+	new->n = number;
 
 	if (node == NULL || node->n >= number)
 	{
 		new->next = node;
-		*head = new_node;
-		return (new_node);
+		*head = new;
+		return (new);
 	}
 
 	while (node && node->next && node->next->n < number)
 		node = node->next;
 
-	new_node->next = node->next;
-	node->next = new_node;
+	new->next = node->next;
+	node->next = new;
 
-	return (new_node);
+	return (new);
 }

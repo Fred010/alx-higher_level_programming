@@ -2,25 +2,25 @@
 """Solves the N-queens puzzle.
 
 Attributes:
-    board (list): A list of lists representing the chessboard.
-    solutions (list): A list of lists containing solutions.
+    board (list): A list of lists representing the chessboard
+    solutions (list): A list of lists containing solutions
 """
 import sys
 
 
 def init_board(n):
-    """initialize an `n`x`n` sized chessboard with 0's."""
+    """Initialize an `n`x`n` sized chessboard with 0's."""
     board = []
     [board.append([]) for i in range(n)]
-    [row.append(" ") for i in range(n) for row in board]
-    return board
+    [row.append(' ') for i in range(n) for row in board]
+    return (board)
 
 
 def board_deepcopy(board):
-    """returns a deepcopy of a chessboard."""
+    """Return a deepcopy of a chessboard."""
     if isinstance(board, list):
         return list(map(board_deepcopy, board))
-    return board
+    return (board)
 
 
 def get_solution(board):
@@ -31,7 +31,7 @@ def get_solution(board):
             if board[r][c] == "Q":
                 solution.append([r, c])
                 break
-    return solution
+    return (solution)
 
 
 def xout(board, row, col):
@@ -100,17 +100,17 @@ def recursive_solve(board, row, queens, solutions):
     """
     if queens == len(board):
         solutions.append(get_solution(board))
-        return solutions
+        return (solutions)
 
     for c in range(len(board)):
         if board[row][c] == " ":
             tmp_board = board_deepcopy(board)
             tmp_board[row][c] = "Q"
             xout(tmp_board, row, c)
-            solutions = recursive_solve
-            (tmp_board, row + 1, queens + 1, solutions)
+            solutions = recursive_solve(tmp_board, row + 1,
+                                        queens + 1, solutions)
 
-    return solutions
+    return (solutions)
 
 
 if __name__ == "__main__":
@@ -126,5 +126,5 @@ if __name__ == "__main__":
 
     board = init_board(int(sys.argv[1]))
     solutions = recursive_solve(board, 0, 0, [])
-    for sol in solutions:
-        print(sol)
+    for soln in solutions:
+        print(soln)

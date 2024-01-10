@@ -1,17 +1,11 @@
 #!/usr/bin/node
-const dict = require('./101-data').dict;
-
-const totalist = Object.entries(dict);
-const vals = Object.values(dict);
-const valsUniq = [...new Set(vals)];
-const newDict = {};
-for (const id1 in valsUniq) {
-  const list = [];
-  for (const id2 in totalist) {
-    if (totalist[id2][1] === valsUniq[id1]) {
-      list.unshift(totalist[id2][0]);
+const { dict } = require('./101-data');
+const occurrencesDict = Object.entries(dict).reduce((acc, [userId, occurrences]) => {
+    if (acc[occurrences]) {
+        acc[occurrences].push(userId);
+    } else {
+        acc[occurrences] = [userId];
     }
-  }
-  newDict[valsUniq[id1]] = list;
-}
-console.log(newDict);
+    return acc;
+}, {});
+console.log('New Dictionary:', occurrencesDict);

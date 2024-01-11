@@ -1,8 +1,6 @@
 #!/usr/bin/node
-
-const firstArg = process.argv[2];
-if (firstArg) {
-  console.log(firstArg);
+if (process.argv[2] === undefined) {
+  console.log('No argument');
 } else {
-  console.log('No Argument');
+  console.log(process.argv[2]);
 }

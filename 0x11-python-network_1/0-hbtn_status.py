@@ -1,11 +1,9 @@
-#!/usr/bin/env python
-import urllib.request
+import urllib
 
-url = 'https://alx-intranet.hbtn.io/status'
+url = "https://alx-intranet.hbtn.io/status"
 
-with urllib.request.urlopen(url) as response:
-    html = response.read().decode('utf-8')
-
-print("- Body response:")
-print("\t- type:", type(html))
-print("\t- content:", html)
+with urllib.urlopen(url) as response:
+    body = response.read()
+    print("- Body response:")
+    print("\t- type: {}".format(type(body)))
+    print("\t- content: {}".format(body))

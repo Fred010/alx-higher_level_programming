@@ -5,6 +5,7 @@ import urllib.request
 Checks if the script is being run directly (not imported as a module)
 scripts to fetch the content of a URL
 """
+
 if __name__ == "__main__":
     url = "https://alx-intranet.hbtn.io/status"
 

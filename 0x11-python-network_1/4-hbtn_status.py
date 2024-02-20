@@ -5,10 +5,8 @@ script that fetches https://alx-intranet.hbtn.io/status
 import requests
 
 if __name__ == "__main__":
-    url = "https://alx-intranet.hbtn.io/status"
-
-    response = requests.get(url)
-    motif = response.txt
+    request = requests.get("https://alx-intranet.hbtn.io/status")
+    motif = request.text
 
     print("Body response:")
     print("\t- type: {}".format(type(motif)))

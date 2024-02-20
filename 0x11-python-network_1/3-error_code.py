@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 scsript that takes and sends URL and displays response
 """

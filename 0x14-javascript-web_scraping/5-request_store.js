@@ -1,22 +1,32 @@
 #!/usr/bin/node
 
 const fs = require('fs');
-const request = require('request');
+const https = require('https');
+
+if (process.argv.length !== 4) {
+  console.error('Usage: ./5-request_store.js <URL> <file_path>');
+  process.exit(1);
+}
 
 const url = process.argv[2];
 const filePath = process.argv[3];
 
-request(url, (error, response, body) => {
-  if (error) {
-    console.error('Error:', error);
-    return;
-  }
-
-  fs.writeFile(filePath, body, { encoding: 'utf-8' }, (err) => {
-    if (err) {
-      console.error('Error writing file:', err);
-    } else {
-      console.log(`Body response written to ${filePath}`);
-    }
+https.get(url, (res) => {
+  let body = '';
+  res.setEncoding('utf-8');
+  res.on('data', (data) => {
+    body += data;
   });
+  res.on('end', () => {
+    fs.writeFile(filePath, body, { encoding: 'utf-8' }, (err) => {
+      if (err) {
+        console.error('Error writing file:', err);
+        process.exit(1);
+      }
+      console.log(`Successfully saved the contents of ${url} to ${filePath}`);
+    });
+  });
+}).on('error', (err) => {
+  console.error('Error fetching URL:', err);
+  process.exit(1);
 });
